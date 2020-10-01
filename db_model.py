@@ -18,7 +18,7 @@ class Tweet(DB.Model):
     user = DB.relationship('User', backref=DB.backref('tweet', lazy=True))
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<Tweet %r>' % self.tweet
 
     '''
     to create the database
