@@ -9,7 +9,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     DB.init_app(app)
 
-    @app.route('/"')
+    @app.route('/')
     def root():
         return 'Welcome to Twitoff'
 
