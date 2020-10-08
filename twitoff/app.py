@@ -51,7 +51,8 @@ def create_app():
     def reset():
         DB.drop_all()
         DB.create_all()
-    
+        return render_template('base.html', title = 'Database has been rest!!', users=User.query.all())
+        
     @app.route('/update') #methods=GET is default
     def update():
         update_all_users()
