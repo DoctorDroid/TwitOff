@@ -13,7 +13,6 @@ tweepy = "*"
 python-dotenv = "*"
 spacy = "*"
 scikit-learn = "*"
-pandas = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 
