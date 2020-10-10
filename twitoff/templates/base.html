@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TwitOff - {{ title }}</title>
+    <title>
+      Twit-Off - {{ title }}
+    </title>
     <link rel="stylesheet" href="https://unpkg.com/picnic"/>
   </head>
-  <body>
-    <nav>
-      <a href="/" class="brand"><span>TwitOff!</span></a>
+  <body style="background-color:rgb(77, 77, 77); color:rgb(45, 45, 45);">
+    <nav style="background-color: rgb(45, 45, 45); color:rgb(77, 77, 77);">
+      <a href="/" class="brand" style="vertical-align: middle; align-content: initial; 
+        width: content; font-size: larger; text-align: justify;">
+        <span><img src="https://raw.githubusercontent.com/jmmiddour/DSPT7-Twitoff/master/twitoff/templates/TwitOff_logo.jpg"
+          height="35%" width="35%" ></span>
+        <span> A Tweet Predictor</span></a>
       <!-- responsive-->
       <input id="bmenub" type="checkbox" class="show">
       <label for="bmenub" class="burger pseudo button">Menu</label>
       <div class="menu">
-        <a href="/update" class="button warning">Update Tweets</a>
+        <a href="/update" class="button">Update Tweets</a>
       </div>
     </nav>
     <article class="flex two" style="padding: 3em 1em;">
       {% block content %}
       <div>
         <h1>{{ title }}</h1>
-        <p>Select two users to compare:</p>
+        <p><b>Select 2 Users and Add a Tweet to Compare:</b></p>
         <form action="/compare" method="post">
           <select name="user1">
             {% for user in users %}
@@ -30,22 +36,34 @@
             <option value="{{ user.username }}">{{ user.username }}</option>
             {% endfor %}
           </select>
-          <input type="text" name="tweet_text" placeholder="Tweet text to predict">
-          <input type="submit" value="Compare Users">
+          <input type="text" name="tweet_text" 
+            placeholder="The Tweet text you want to predict.">
+          <input type="submit" value="Compare Users" target="_self">
         </form>
       </div>
-      <div>
-        <h2>Twitter Users</h2>
-        {% for user in users %}
-        <a href="/user/{{ user.username }}"><span class="stack">{{ user.username }}</span></a>
-        {% endfor %}
-        <form action="/user" method="post">
-          <input type="text" name="user_name" placeholder="User to add">
-          <input type="submit" value="Add User">
-        </form>
+      <div id="centered" style="margin: 9 auto">
+        <center>
+          <h2>Twitter Users</h2>
+          <table>
+            {% for user in users %}
+              <tr>
+                <td rowspan="3"><a href="/user/{{ user.username }}">@{{ user.username }}</a></td>
+              </tr>
+            {% endfor %}
+          </table>
+            <form action="/user" method="post">
+              <input type="text" name="user_name" 
+                placeholder="The Twitter @user (without the @) you want to add.">
+              <input type="submit" value="Add User">
+            </form>
+        </center>
       </div>
       {% endblock %}
     </article>
     <!-- <script src="https://cdn.jsdelivr.net/npm/umbrellajs"/> -->
+    <footer style="vertical-align: bottom; text-align: center; font-size: small;">
+      Create by <a href="https:\\joannemiddour.com">Joanne Middour</a><br>
+      TwitOff image provided by <a href="https://www.linkedin.com/in/timothy-eakin/">
+      Timothy Eakin</a></footer>
   </body>
 </html>
