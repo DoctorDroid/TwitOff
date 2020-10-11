@@ -1,7 +1,74 @@
-{% extends "base.html" %}
-{% block content %}
-<div id="prediction">
-  <h2>{{ title }}</h2>
-  <p>{{ message }}</p>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      {{ title }}
+    </title>
+    <link rel="stylesheet" href="https://unpkg.com/picnic"/>
+  </head>
+  <body style="background-color:rgb(77, 77, 77); color:rgb(0, 0, 0);">
+    <nav style="background-color: rgb(45, 45, 45); color:rgb(187, 187, 187);">
+      <a href="/" class="brand" style="vertical-align: middle; align-content: initial; 
+        width: content; font-size: larger; text-align: justify;">
+        <span><img src="https://raw.githubusercontent.com/DoctorDroid/TwitOff/master/twitoff/templates/TwitOff%20logo.jpg"
+          width="42%" ></span>
+        <span> A Tweet Predictor</span></a>
+      <!-- responsive-->
+      <input id="bmenub" type="checkbox" class="show">
+      <label for="bmenub" class="burger pseudo button">Menu</label>
+      <div class="menu">
+        <a href="/update" class="button">Update Tweets</a>
+      </div>
+    </nav>
+    <article class="flex two" style="padding: 3em 1em;">
+      {% block content %}
+      <div>
+        <h1>{{ title }}</h1>
+        <p><b>Select 2 users and enter a real or made up tweet:</b></p>
+        <form action="/compare" method="post">
+          <select name="user1">
+            {% for user in users %}
+            <option value="{{ user.username }}">{{ user.username }}</option>
+            {% endfor %}
+          </select>
+          <select name="user2">
+            {% for user in users %}
+            <option value="{{ user.username }}">{{ user.username }}</option>
+            {% endfor %}
+          </select>
+          <input type="text" name="tweet_text" 
+            placeholder="The Tweet text you want to predict.">
+          <input type="submit" value="Make Prediction" target="_self">
+        </form><br>
+        <div class="prediction">
+            <h2>Prediction:</h2>
+              <p>
+                {{ message }}
+              </p>
+        </div>
+      </div>
+      <div>
+        <center>
+          <h2>Twitter Users</h2>
+          <table>
+            {% for user in users %}
+              <tr>
+                <td rowspan="3"><a href="/user/{{ user.username }}">{{ user.username }}</a></td>
+              </tr>
+            {% endfor %}
+          </table>
+            <form action="/user" method="post">
+              <input type="text" name="user_name" 
+                placeholder="The Twitter username to add. (with or without the '@')">
+              <input type="submit" value="Add User">
+            </form>
+        </center>
+      </div>
+      {% endblock %}
+    </article>
+    <footer style="vertical-align: bottom; text-align: center; font-size: small;">
+      App and Logo Created by <a href="https://www.linkedin.com/in/timothy-eakin/">Timothy Eakin</a><br>
+      HTML Template Designed by <a href="https:\\joannemiddour.com">Joanne Middour</a>      
+    </footer>
+  </body>
+</html>
