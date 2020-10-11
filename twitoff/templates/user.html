@@ -2,8 +2,8 @@
 {% extends "base.html" %}
 {% block content %}
 <div id="user-info">
-  <h2>User: {{ title }} added. Click the TwitOff logo to continue.</h2>
-  <p>{{ message }}</p>
+  <h2>User: {{ title }}<br> Click the TwitOff logo to continue.</h2>
+  <p><b>{{ message }}</b></p>
   {% for tweet in tweets %}
   <span class="stack"><li>{{ tweet.id }} - {{ tweet.tweet }}</li></span>
   {% endfor %}

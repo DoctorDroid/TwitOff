@@ -24,8 +24,8 @@ def create_app():
             if request.method == "POST":
                 add_user_tweepy(name)
                 message = f"User {name} successfully added!"
-            else:
-                message = f"User {name} not found on Twitter."
+            elif request.method == "GET":
+                message = f"Tweets by {name} (click 'Update Tweets' to update):"
             tweets = User.query.filter(User.username == name).one().tweet
         except Exception as e:
             print(f'Error adding {name}: {e}')
