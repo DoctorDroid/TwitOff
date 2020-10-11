@@ -47,7 +47,7 @@ def create_app():
             message = f'''{tweet_text} was more likely to have been tweeted by {user1 if prediction else user2} 
                           than {user2 if prediction else user1}'''
 
-        return render_template('predict.html', title='Prediction Results', message=message)
+        return render_template('predict.html', title='Prediction Results', **locals(), users=User.query.all())
 
     @app.route('/reset')
     def reset():
