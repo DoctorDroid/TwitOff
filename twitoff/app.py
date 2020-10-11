@@ -24,6 +24,8 @@ def create_app():
             if request.method == "POST":
                 add_user_tweepy(name)
                 message = f"User {name} successfully added!"
+            else:
+                message = f"User {name} not found on Twitter."
             tweets = User.query.filter(User.username == name).one().tweet
         except Exception as e:
             print(f'Error adding {name}: {e}')
@@ -45,7 +47,7 @@ def create_app():
             message = f'''{tweet_text} was more likely to have been tweeted by {user1 if prediction else user2} 
                           than {user2 if prediction else user1}'''
 
-        return render_template('predict.html', title='Prediction', message=message)
+        return render_template('predict.html', title='Prediction Results', message=message)
 
     @app.route('/reset')
     def reset():
